@@ -1,5 +1,6 @@
 plugins {
     id 'java-library'
+    id 'io.qameta.allure' version '2.9.5'
 }
 
 group 'task.mego'
@@ -16,11 +17,16 @@ def junitVersion = "5.11.3"
 def junitPlatformVersion = "1.11.2"
 def restAssuredVersion = "5.5.0"
 def jacksonVersion = "2.18.0"
+def allureVersion = "2.29.0"
+def aspectjweaverVersion = "1.9.22.1"
 
 dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
     testImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
     testImplementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    testImplementation "io.qameta.allure:allure-bom:${allureVersion}"
+    testImplementation "io.qameta.allure:allure-rest-assured:${allureVersion}"
+    testImplementation "org.aspectj:aspectjweaver:${aspectjweaverVersion}"
 
     testRuntimeOnly "org.junit.platform:junit-platform-launcher:${junitPlatformVersion}"
 }
@@ -33,3 +39,16 @@ tasks.withType(Test).configureEach {
     useJUnitPlatform()
     systemProperties += System.properties
 }
+
+allure {
+    version = "${allureVersion}"
+    useJUnit5 {
+        version = "${allureVersion}"
+    }
+}
+
+test {
+
+}
+
+

@@ -1,5 +1,6 @@
 package mego.tests;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import mego.config.Config;
@@ -17,6 +18,7 @@ public class BaseSpec {
     public RequestSpecification request() {
         return given()
                 .baseUri(CFG.apiUrl())
+                .filter(new AllureRestAssured())
                 .contentType(ContentType.JSON)
                 .log().uri()
                 .log().body()
